@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>FourE — 기본 페이지</title>
+    <link rel="icon" href="data:;base64,=">
+    <style>
+        :root {
+            --bg: #f7f9fc;
+            --accent: #0066ff;
+            --muted: #445;
+            --card: #fff
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            color: var(--muted);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 24px
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent), #00b4ff);
+            display: inline-block
+        }
+
+        .nav {
+            display: flex;
+            gap: 12px
+        }
+
+        .nav a {
+            color: var(--muted);
+            text-decoration: none;
+            padding: 8px 10px;
+            border-radius: 8px
+        }
+
+        .nav a:hover {
+            background: rgba(0, 0, 0, 0.04);
+            color: #111
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            align-items: center;
+            padding: 48px 0
+        }
+
+        .title {
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            color: #0b1;
+            line-height: 1.05
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #445
+        }
+
+        .cta {
+            margin-top: 12px
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 8px;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            padding: 24px 0
+        }
+
+        .card {
+            background: var(--card);
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(20, 30, 50, 0.06)
+        }
+
+        .footer {
+            padding: 24px 0;
+            color: #7a7a7a;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            margin-top: 24px
+        }
+
+        @media(max-width:600px) {
+            .nav {
+                display: none
+            }
+
+            .header .menu-toggle {
+                display: block
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 0;
+            font-size: 1.25rem
+        }
+    </style>
+</head>
+
+<body>
+    <header class="container header" role="banner">
+        <div class="brand">
+            <span class="logo" aria-hidden="true"></span>
+            <div>
+                <strong>FourE</strong>
+                <div style="font-size:0.85rem;color:#889">Apple Developer Academy — 4E</div>
+            </div>
+        </div>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">☰</button>
+        <nav id="main-nav" class="nav" role="navigation">
+            <a href="#about">소개</a>
+            <a href="#features">기능</a>
+            <a href="#contact">연락</a>
+        </nav>
+    </header>
+
+    <main class="container" role="main">
+        <section class="hero">
+            <div>
+                <h1 class="title">FourE — 깔끔하고 반응형인 기본 페이지</h1>
+                <p class="subtitle">간단한 소개와 레이아웃을 포함한 기본 템플릿입니다. 프로젝트 시작용으로 사용하세요.</p>
+                <div class="cta">
+                    <a class="btn" href="#features">시작하기</a>
+                    <a style="margin-left:8px;color:var(--accent);text-decoration:none" href="#about">더 보기</a>
+                </div>
+            </div>
+            <img src="" alt="" style="width:100%;max-width:420px;border-radius:12px;display:none">
+        </section>
+
+        <section id="features" class="features" aria-labelledby="features-heading">
+            <h2 id="features-heading" style="grid-column:1/-1;margin:0">주요 기능</h2>
+            <div class="card">
+                <h3>반응형</h3>
+                <p>모바일과 데스크탑 모두에서 잘 보이도록 설계되었습니다.</p>
+            </div>
+            <div class="card">
+                <h3>간단한 스타일</h3>
+                <p>CSS만으로 빠르게 커스터마이징 가능합니다.</p>
+            </div>
+            <div class="card">
+                <h3>접근성 고려</h3>
+                <p>시멘틱 태그와 ARIA 속성을 사용했습니다.</p>
+            </div>
+        </section>
+
+        <section id="about" class="card" style="margin-top:24px">
+            <h2>소개</h2>
+            <p>이 템플릿은 수업 과제나 프로토타입 제작을 위해 만들어졌습니다. 자유롭게 수정하세요.</p>
+        </section>
+
+        <section id="contact" class="card" style="margin-top:16px">
+            <h2>연락</h2>
+            <p>프로젝트 관련 질문은 팀 내부 채널을 사용하세요.</p>
+        </section>
+    </main>
+
+    <footer class="container footer" role="contentinfo">
+        <div>© 2025 FourE · Apple Developer Academy</div>
+    </footer>
+
+    <script>
+        document.querySelector('.menu-toggle')?.addEventListener('click', function () {
+            const nav = document.getElementById('main-nav');
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', String(!expanded));
+            nav.style.display = expanded ? 'none' : 'flex';
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 600) document.getElementById('main-nav').style.display = 'flex';
+        });
+    </script>
+</body>
+
+</html>
