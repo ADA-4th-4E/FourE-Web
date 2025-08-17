@@ -172,6 +172,11 @@
             </div>
             <img src="" alt="" style="width:100%;max-width:420px;border-radius:12px;display:none">
         </section>
+        <!-- 쿼리 파라미터 표시 영역 -->
+        <section id="query-view" class="card" style="display:none;margin-top:16px" aria-live="polite">
+            <h2>쿼리 파라미터</h2>
+            <dl id="query-list" style="display:grid;grid-template-columns:auto 1fr;gap:8px 12px;margin:0"></dl>
+        </section>
 
         <section id="features" class="features" aria-labelledby="features-heading">
             <h2 id="features-heading" style="grid-column:1/-1;margin:0">주요 기능</h2>
@@ -214,6 +219,26 @@
         window.addEventListener('resize', function () {
             if (window.innerWidth > 600) document.getElementById('main-nav').style.display = 'flex';
         });
+
+        // 쿼리 스트링을 파싱해 화면에 표시
+        (function renderQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            if (!params.toString()) return; // 쿼리 없음
+
+            const section = document.getElementById('query-view');
+            const list = document.getElementById('query-list');
+            if (!section || !list) return;
+
+            for (const [key, value] of params) {
+                const dt = document.createElement('dt');
+                dt.textContent = key;
+                const dd = document.createElement('dd');
+                dd.textContent = value;
+                list.appendChild(dt);
+                list.appendChild(dd);
+            }
+            section.style.display = 'block';
+        })();
     </script>
 </body>
 
