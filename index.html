@@ -178,6 +178,12 @@
             <dl id="query-list" style="display:grid;grid-template-columns:auto 1fr;gap:8px 12px;margin:0"></dl>
         </section>
 
+        <!-- settlement 디코딩 및 표시 영역 -->
+        <section id="settlement-view" class="card" style="display:none;margin-top:16px" aria-live="polite">
+            <h2>결산 내역</h2>
+            <dl id="settlement-list" style="display:grid;grid-template-columns:auto 1fr;gap:8px 12px;margin:0"></dl>
+        </section>
+
         <section id="features" class="features" aria-labelledby="features-heading">
             <h2 id="features-heading" style="grid-column:1/-1;margin:0">주요 기능</h2>
             <div class="card">
@@ -238,6 +244,40 @@
                 list.appendChild(dd);
             }
             section.style.display = 'block';
+        })();
+
+        // settlement 파라미터(base64 JSON) 디코딩해 화면에 표시
+        (function renderSettlement() {
+            const params = new URLSearchParams(window.location.search);
+            const encoded = params.get('settlement');
+            if (!encoded) return;
+            const section = document.getElementById('settlement-view');
+            const list = document.getElementById('settlement-list');
+            if (!section || !list) return;
+            try {
+                // base64 → binary string → UTF-8 decode
+                const binary = atob(encoded);
+                const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+                const jsonText = new TextDecoder('utf-8').decode(bytes);
+                const data = JSON.parse(jsonText);
+                for (const [key, value] of Object.entries(data)) {
+                    const dt = document.createElement('dt');
+                    dt.textContent = key;
+                    const dd = document.createElement('dd');
+                    if (Array.isArray(value)) {
+                        dd.textContent = JSON.stringify(value);
+                    } else if (value && typeof value === 'object') {
+                        dd.textContent = JSON.stringify(value);
+                    } else {
+                        dd.textContent = value;
+                    }
+                    list.appendChild(dt);
+                    list.appendChild(dd);
+                }
+                section.style.display = 'block';
+            } catch (e) {
+                console.error('Failed to parse settlement data:', e);
+            }
         })();
     </script>
 </body>
